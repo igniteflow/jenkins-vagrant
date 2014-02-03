@@ -16,7 +16,7 @@ _For Ubuntu 13.10 users, these dependencies can be installed with ./scripts/setu
 
 ## Getting Started
 
-Once you have the correct versions of Vagrant and VirtualBox install run:
+Once you have the correct versions of Vagrant and VirtualBox the following will get you up and running:
 
     git clone git@github.com:igniteflow/jenkins-vagrant.git
     cd jenkins-vagrant
@@ -24,12 +24,10 @@ Once you have the correct versions of Vagrant and VirtualBox install run:
 
 Here are some options to customise your instance:
 
-1.  (Optional) Copy `./config.json.example` to `./config.json` and populate with your settings.  The configuration file is a list of Jenkins job names and the absolute path to their Jenkins job config.xml.  The jobs folders will be created under `./jenkins/jobs/` and the config.xml files will be copied into them.  If you don't have an existing Jenkins job, then skip this step and just create the job directly in Jenkins once booted.
-2.  (Optional) Add your project specific dependencies to provisioners/shell/project.sh.  An example script for a Python project requiring MySQL, virtualenv, pip and Ruby dependencies can be found at provisioners/shell/project.sh.example.  Enable this provisoner in the next step.
-3.  (Optional) Choose your provisioners.  By default only Jenkins will be installed.  If you require NodeJS, Appengine or project specific dependencies then uncomment the provisoner script calls in the Vagrantfile under `# provisioners`
-4.  (Optional) Add/remove required Jenkins plugins in `./jenkins/plugins`
-5.  Run `make install` - this command will import the VM and install all the dependencies.  Once completed
-(took 8m34.655s on an Dell XPS 13 Xubuntu 13.10) visit Jenkins at [http://localhost:9999/](http://localhost:9999/)
+1.  **Add existing Jenkins jobs** Copy `./config.json.example` to `./config.json` and populate with your settings.  The configuration file is a list of Jenkins job names and the absolute path to their Jenkins job config.xml.  The jobs folders will be created under `./jenkins/jobs/` and the config.xml files will be copied into them.  If you don't have an existing Jenkins job, then skip this step and just create the job directly in Jenkins once booted.
+2.  **Install project specific dependencies** Add your project specific dependencies to provisioners/shell/project.sh.  An example script for a Python project requiring MySQL, virtualenv, pip and Ruby dependencies can be found at provisioners/shell/project.sh.example.  Enable this provisoner in the next step.
+3.  **Add more provisioners** Choose your provisioners.  By default only Jenkins will be installed.  If you require NodeJS, Appengine or project specific dependencies then uncomment the provisoner script calls in the Vagrantfile under `# provisioners`
+4.  **Add/remove Jenkins plugins** Add/remove required Jenkins plugins in `./jenkins/plugins`
 
 ## Make commands
 
