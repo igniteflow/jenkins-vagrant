@@ -18,6 +18,7 @@ def reset():
 
 
 def initialise():
+    subprocess.call(['mkdir', '-p', JOBS])
     if exists('config.json'):
         with open('config.json') as f:
             config = json.loads(f.read())
@@ -33,6 +34,8 @@ def initialise():
     # symlinked by provisioners/shell/jenkins.sh to the Jenkins home directory, which is
     # /var/lib/jenkins - required for Google Code authentication
     subprocess.call(['cp', '-f', HOME + '/.netrc', '.'])
+
+    # copy the SSH public key for Git(Hub) authentication
     subprocess.call(['cp', '-f', HOME + '/.ssh/id_rsa.pub', '.'])
 
 initialise()

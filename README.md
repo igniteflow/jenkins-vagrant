@@ -16,6 +16,14 @@ _For Ubuntu 13.10 users, these dependencies can be installed with ./scripts/setu
 
 ## Getting Started
 
+Once you have the correct versions of Vagrant and VirtualBox install run:
+
+    git clone git@github.com:igniteflow/jenkins-vagrant.git
+    cd jenkins-vagrant
+    make install
+
+Here are some options to customise your instance:
+
 1.  (Optional) Copy `./config.json.example` to `./config.json` and populate with your settings.  The configuration file is a list of Jenkins job names and the absolute path to their Jenkins job config.xml.  The jobs folders will be created under `./jenkins/jobs/` and the config.xml files will be copied into them.  If you don't have an existing Jenkins job, then skip this step and just create the job directly in Jenkins once booted.
 2.  (Optional) Add your project specific dependencies to provisioners/shell/project.sh.  An example script for a Python project requiring MySQL, virtualenv, pip and Ruby dependencies can be found at provisioners/shell/project.sh.example.  Enable this provisoner in the next step.
 3.  (Optional) Choose your provisioners.  By default only Jenkins will be installed.  If you require NodeJS, Appengine or project specific dependencies then uncomment the provisoner script calls in the Vagrantfile under `# provisioners`
@@ -25,11 +33,13 @@ _For Ubuntu 13.10 users, these dependencies can be installed with ./scripts/setu
 
 ## Make commands
 
-`make install` Install the VM, Jenkins dependencies and boot
-`make rebuild` Detroys the VM and reinstalls
-`make destroy` Shortcut for `vagrant destroy`
-`make update`  Run the provisioner scripts listing in the Vagrantfile without rebooting the VM
-`make prepare` Ubuntu only.  Prepare the client machine by installing required versions of Vagrant and Virtualbox.
+Command | Description
+--------|---------------------------------------
+`make install` | Installs the VM and boots Jenkins
+`make rebuild` | Detroys the VM and reinstalls
+`make destroy` | Shortcut for `vagrant destroy`
+`make update`  | Run the provisioner scripts listing in the Vagrantfile without rebooting the VM
+`make prepare` | Ubuntu only.  Prepare the client machine by installing required versions of Vagrant and Virtualbox.
 
 
 ## Notes

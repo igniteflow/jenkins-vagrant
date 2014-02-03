@@ -24,4 +24,4 @@ sudo pip install -U pip
 sudo pip install virtualenv
 
 sudo apt-get autoremove -y
-sudo chown `id jenkins -u`:`id jenkins -g` /var/lib/jenkins
+sudo chown -R `id jenkins -u`:`id jenkins -g` /var/lib/jenkins

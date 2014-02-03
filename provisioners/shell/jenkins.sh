@@ -31,9 +31,6 @@ done < "/vagrant/jenkins/plugins"
 sudo rm -rf /var/lib/jenkins/jobs
 sudo ln -fs /vagrant/jenkins/jobs/ /var/lib/jenkins/jobs
 
-# symlink .netrc for Google Code authentication
-sudo ln -fs /vagrant/.netrc /var/lib/jenkins
-
 # symlink SSH public key .id_rsa.pub
 mkdir -p /var/lib/jenkins/.ssh
 sudo ln -fs /vagrant/id_rsa.pub /var/lib/jenkins/.ssh/id_rsa.pub
@@ -45,4 +42,4 @@ sudo service jenkins restart
 sudo apt-get -y autoremove
 
 # ensure permissions
-sudo chown `id jenkins -u`:`id jenkins -g` /var/lib/jenkins
+sudo chown -R `id jenkins -u`:`id jenkins -g` /var/lib/jenkins
