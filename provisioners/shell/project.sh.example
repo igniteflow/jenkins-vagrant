@@ -1,0 +1,27 @@
+#!/bin/bash
+
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+DEBIAN_FRONTEND=noninteractive
+
+set -x
+
+sudo apt-get update -y
+sudo apt-get install -yq build-essential g++ make python-pip python-dev \
+    python-software-properties python-imaging libxml2-dev libxslt1-dev \
+    libjpeg62-dev unzip libssl-dev
+
+# mysql
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+sudo apt-get -y install mysql-server mysql-client libmysqlclient-dev
+
+# ruby - meh
+sudo apt-get install -yq ruby-full rubygems1.8
+sudo gem install sass compass
+
+# pip
+sudo pip install -U pip
+sudo pip install virtualenv
+
+sudo apt-get autoremove -y
+sudo chown `id jenkins -u`:`id jenkins -g` /var/lib/jenkins

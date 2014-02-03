@@ -1,0 +1,6 @@
+.vagrant
+.netrc
+config.json
+jenkins/jobs/*
+provisioners/shell/project.sh
+id_rsa.pub

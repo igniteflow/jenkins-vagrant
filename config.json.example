@@ -1,0 +1,12 @@
+{
+    "projects": [
+        [
+            "job1",
+            "/path/to/jenkins/job/job1/config.xml"
+        ],
+        [
+            "job2",
+            "/path/to/jenkins/job/job2/config.xml"
+        ]
+    ]
+}
