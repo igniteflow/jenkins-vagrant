@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jenkins-vagrant by igniteflow</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">jenkins-vagrant</h1>
+        <p class="header">A Vagrantfile, shell provisioners and a Makefile to automate the creation of a Jenkins instance on a VM</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/igniteflow/jenkins-vagrant/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/igniteflow/jenkins-vagrant/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/igniteflow/jenkins-vagrant">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/igniteflow">igniteflow</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="vagrant-jenkins" class="anchor" href="#vagrant-jenkins"><span class="octicon octicon-link"></span></a>vagrant-jenkins</h1>
+
+<p>Using Vagrant, a Makefile and shell provisoner scripts allows the easy creation of a running Jenkins instance.</p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>Install:</p>
+
+<p><a href="http://www.vagrantup.com/downloads.html">Vagrant &gt;=1.4.3</a></p>
+
+<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox &gt;= 4.3.6</a></p>
+
+<p><em>For Ubuntu 13.10 users, these dependencies can be installed with ./scripts/setup-ubuntu-client.sh</em></p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>With requirements satisfied the following three commands will result in Jenkins being available on <a href="http://localhost:9999/">http://localhost:9999/</a>:</p>
+
+<pre><code>git clone git@github.com:igniteflow/jenkins-vagrant.git
+cd jenkins-vagrant
+make install
+</code></pre>
+
+<p>Here are some options to customise your instance:</p>
+
+<ol>
+<li> <strong>Add existing Jenkins jobs</strong> Copy <code>./config.json.example</code> to <code>./config.json</code> and populate with your settings.  The configuration file is a list of Jenkins job names and the absolute path to their Jenkins job config.xml.  The jobs folders will be created under <code>./jenkins/jobs/</code> and the config.xml files will be copied into them.  If you don't have an existing Jenkins job, then skip this step and just create the job directly in Jenkins once booted.</li>
+<li> <strong>Install project specific dependencies</strong> to <code>provisioners/shell/project.sh</code>.  An example script for a Python project requiring MySQL, virtualenv, pip and Ruby dependencies can be found at provisioners/shell/project.sh.example.  Enable this provisoner in the next step.</li>
+<li> <strong>Add more provisioners</strong>  By default only Jenkins and its dependencies will be installed.  If you require NodeJS, Appengine or project specific dependencies then uncomment the required provisoner script calls in the Vagrantfile under <code># provisioners</code>.  Note that you can re-run provisioner scripts without having to reboot the VM with <code>make update</code>
+</li>
+<li> <strong>Add/remove Jenkins plugins</strong>  Edit the following file <code>./jenkins/plugins</code>
+</li>
+</ol><h2>
+<a name="make-commands" class="anchor" href="#make-commands"><span class="octicon octicon-link"></span></a>Make commands</h2>
+
+<table>
+<thead><tr>
+<th>Command</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>make install</code></td>
+<td>Installs the VM and boots Jenkins</td>
+</tr>
+<tr>
+<td><code>make rebuild</code></td>
+<td>Detroys the VM and reinstalls</td>
+</tr>
+<tr>
+<td><code>make destroy</code></td>
+<td>Shortcut for <code>vagrant destroy</code>
+</td>
+</tr>
+<tr>
+<td><code>make update</code></td>
+<td>Run the provisioner scripts listing in the Vagrantfile without rebooting the VM</td>
+</tr>
+<tr>
+<td><code>make prepare</code></td>
+<td>Ubuntu only.  Prepare the client machine by installing required versions of Vagrant and Virtualbox.</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<ul>
+<li>The amount of RAM allocated to the VM is specified in the Vagrantfile under vb.customize.  Adjust this as necessary.</li>
+<li>The <code>./jenkins/provisionsers/shell/jenkins.sh</code> script copies your <code>~/.netrc</code> and <code>~/.ssh/id_rsa.pub</code> to the project
+root.  This files are in .gitignore and will not be added to the repo.  They are required so that Jenkins can access
+remote Git and Google Code repositories.</li>
+</ul><h2>
+<a name="future" class="anchor" href="#future"><span class="octicon octicon-link"></span></a>Future</h2>
+
+<p>Use a different provisioners - Chef, Puppet, Salt, Docker (?) to be OS agnostic</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
