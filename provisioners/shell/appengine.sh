@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# symlink .netrc for Google Code authentication
+# assumes .netrc was copied into the shared folder on the client
+# machine by `make install`
+sudo ln -fs /vagrant/.netrc /var/lib/jenkins
+
 # install Appengine
 APP_ENGINE_DIR=/usr/bin/google_appengine
 DOWNLOAD_URL=$1
