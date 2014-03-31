@@ -2,11 +2,13 @@
 
 # install Appengine
 APP_ENGINE_DIR=/usr/bin/google_appengine
+DOWNLOAD_URL=$1
+
 while [ ! -d "$APP_ENGINE_DIR" ]; do
   cd /usr/bin
-  sudo wget --tries=70 --quiet --timeout=30 http://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip
-  sudo unzip -q google_appengine_1.8.9.zip
-  sudo rm google_appengine_1.8.9.zip
+  sudo wget --tries=70 --quiet --timeout=30 $DOWNLOAD_URL -O google_appengine.zip
+  sudo unzip -q google_appengine.zip
+  sudo rm google_appengine.zip
 done
 
 # check installation was successful
